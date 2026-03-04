@@ -6,12 +6,46 @@ export class ReceivableService {
     return prisma.receivable.create({ data });
   }
 
-  async findAll() {
-    return prisma.receivable.findMany({
-      orderBy: {
-        due_date: 'asc',
+  async findAll(
+    page: number = 1,
+    limit: number = 10,
+    startDate?: string,
+    endDate?: string,
+  ) {
+    const skip = (page - 1) * limit;
+    const where: Prisma.ReceivableWhereInput = {};
+
+    if (startDate || endDate) {
+      where.due_date = {};
+      if (startDate) {
+        where.due_date.gte = new Date(startDate);
+      }
+      if (endDate) {
+        where.due_date.lte = new Date(endDate);
+      }
+    }
+
+    const [data, total] = await Promise.all([
+      prisma.receivable.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy: {
+          due_date: 'asc',
+        },
+      }),
+      prisma.receivable.count({ where }),
+    ]);
+
+    return {
+      data,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
-    });
+    };
   }
 
   async findById(id: string) {

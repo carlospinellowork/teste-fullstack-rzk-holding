@@ -17,9 +17,19 @@ export class PayableController {
   }
 
   async getAll(req: Request, res: Response) {
-    const payables = await payableService.findAll();
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+    const startDate = req.query.startDate as string;
+    const endDate = req.query.endDate as string;
 
-    return res.status(201).json(payables);
+    const payables = await payableService.findAll(
+      page,
+      limit,
+      startDate,
+      endDate,
+    );
+
+    return res.status(200).json(payables);
   }
 
   async getById(req: Request, res: Response) {
