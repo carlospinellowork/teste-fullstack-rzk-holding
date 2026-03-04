@@ -15,8 +15,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail,
-  SidebarTrigger,
+  SidebarRail
 } from "@/components/ui/sidebar";
 
 const navItems = [
@@ -51,7 +50,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <span className="font-bold text-slate-800 text-lg group-data-[collapsible=icon]:hidden">
             RZK Holding
           </span>
-          <SidebarTrigger className="-ml-1" />
         </div>
       </SidebarHeader>
 
