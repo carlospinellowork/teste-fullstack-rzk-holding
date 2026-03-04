@@ -13,6 +13,7 @@
     "docker:down": "docker compose down",
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate",
+    "seed": "tsx prisma/seed.ts",
     "db:seed": "npx prisma db seed",
     "setup": "npm run docker:up && echo \"Waiting for DB...\" && sleep 10 && npm run prisma:migrate && npm run db:seed"
   },
@@ -20,7 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^7.4.2",
+    "@prisma/client": "^5.22.0",
     "axios": "^1.13.6",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
@@ -39,10 +40,13 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "prettier": "^3.8.1",
-    "prisma": "^7.4.2",
+    "prisma": "^5.22.0",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
