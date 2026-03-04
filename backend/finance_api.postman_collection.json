@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "a90b3952-47f6-4ef3-9878-1f1c7d24a350",
+		"name": "Finance API - RZK Holding",
+		"description": "Collection for testing Payables and Receivables endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Payables",
+			"item": [
+				{
+					"name": "Create Payable",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"provider\": \"AWS Cloud\",\n    \"description\": \"Monthly hosting fee\",\n    \"amount\": 150.75,\n    \"due_date\": \"2024-12-25\",\n    \"category\": \"Infrastructure\",\n    \"status\": \"PENDING\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/payables",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Payables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payables",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Payable by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payables/REPLACE_WITH_ID",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payables",
+								"REPLACE_WITH_ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Payable",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"PAID\",\n    \"amount\": 160.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/payables/REPLACE_WITH_ID",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payables",
+								"REPLACE_WITH_ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Payable",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/payables/REPLACE_WITH_ID",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"payables",
+								"REPLACE_WITH_ID"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Receivables",
+			"item": [
+				{
+					"name": "Create Receivable",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"client\": \"Google Inc\",\n    \"description\": \"Software development services\",\n    \"amount\": 5000.00,\n    \"due_date\": \"2024-12-30\",\n    \"category\": \"Services\",\n    \"status\": \"PENDING\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/receivables",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"receivables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Receivables",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/receivables",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"receivables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Receivable by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/receivables/REPLACE_WITH_ID",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"receivables",
+								"REPLACE_WITH_ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Receivable",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"RECEIVED\",\n    \"amount\": 5100.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/receivables/REPLACE_WITH_ID",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"receivables",
+								"REPLACE_WITH_ID"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Receivable",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/receivables/REPLACE_WITH_ID",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"receivables",
+								"REPLACE_WITH_ID"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3001",
+			"type": "string"
+		}
+	]
+}
