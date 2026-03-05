@@ -6,8 +6,8 @@ import { SummaryCards } from "./summary-cards";
 interface DashboardViewProps {
   data: DashboardSummary;
   chartData: {
-    monthlyData: any[];
-    lineChartData: any[];
+    monthlyData: Array<{ name: string; pagar: number; receber: number }>;
+    lineChartData: Array<{ date: string; Saldo: number }>;
   };
   formatBRL: (val: number) => string;
 }

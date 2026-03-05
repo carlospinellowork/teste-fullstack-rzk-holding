@@ -41,9 +41,11 @@ export interface DashboardSummary {
   totals: {
     payableBRL: number;
     receivableBRL: number;
+    pendingTotalBRL: number;
     balanceBRL: number;
     payableUSD: number;
     receivableUSD: number;
+    pendingTotalUSD: number;
     balanceUSD: number;
     overdueCount: number;
     conversionRate: number;

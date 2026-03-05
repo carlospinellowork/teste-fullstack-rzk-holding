@@ -42,6 +42,14 @@ export function SummaryCards({ totals }: SummaryCardsProps) {
       bg: "bg-rose-50"
     },
     {
+      title: "Total Pendente",
+      value: formatBRL(totals.pendingTotalBRL),
+      description: "Volume bruto em aberto",
+      icon: DollarSign,
+      color: "text-slate-600",
+      bg: "bg-slate-50"
+    },
+    {
       title: "Saldo Projetado",
       value: formatBRL(totals.balanceBRL),
       valueUSD: formatUSD(totals.balanceUSD),
@@ -61,7 +69,7 @@ export function SummaryCards({ totals }: SummaryCardsProps) {
   ];
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
       {summaryCards.map((stat) => (
         <Card key={stat.title} className="border-none shadow-sm bg-white overflow-hidden group hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -84,7 +92,6 @@ export function SummaryCards({ totals }: SummaryCardsProps) {
               {stat.description}
             </p>
           </CardContent>
-          <div className={`h-1.5 w-full ${stat.color.replace('text', 'bg')} opacity-20`} />
         </Card>
       ))}
     </div>

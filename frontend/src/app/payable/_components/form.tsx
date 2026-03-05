@@ -58,7 +58,7 @@ export const PayableForm = ({
         amount: payableSelectedData.amount,
         due_date: new Date(payableSelectedData.due_date).toISOString().split('T')[0],
         category: payableSelectedData.category || "",
-        status: payableSelectedData.status as any,
+        status: payableSelectedData.status,
       });
     } else {
       reset(getDefaultValues());

@@ -26,13 +26,24 @@ import {
 
 const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#ec4899"];
 
-interface ChartsSectionProps {
-  monthlyData: any[];
-  byCategory: DashboardSummary["charts"]["byCategory"];
-  lineChartData: any[];
+interface MonthlyData {
+  name: string;
+  pagar: number;
+  receber: number;
 }
 
-function BarChart3(props: any) {
+interface LineChartData {
+  date: string;
+  Saldo: number;
+}
+
+interface ChartsSectionProps {
+  monthlyData: MonthlyData[];
+  byCategory: DashboardSummary["charts"]["byCategory"];
+  lineChartData: LineChartData[];
+}
+
+function BarChart3(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

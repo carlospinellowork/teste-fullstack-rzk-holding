@@ -70,7 +70,7 @@ export function GenericTable<T>({
                     key={col.key}
                     className={`px-6 py-3 ${col.className || ""}`}
                   >
-                    {col.render ? col.render(item) : (item as any)[col.key] || "—"}
+                    {col.render ? col.render(item) : (item as Record<string, any>)[col.key] || "—"}
                   </TableCell>
                 ))}
               </TableRow>

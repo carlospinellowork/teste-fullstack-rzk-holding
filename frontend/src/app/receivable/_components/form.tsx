@@ -58,7 +58,7 @@ export const ReceivableForm = ({
         amount: receivableSelectedData.amount,
         due_date: new Date(receivableSelectedData.due_date).toISOString().split('T')[0],
         category: receivableSelectedData.category || "",
-        status: receivableSelectedData.status as any,
+        status: receivableSelectedData.status,
       });
     } else {
       reset(getDefaultValues());
@@ -67,11 +67,11 @@ export const ReceivableForm = ({
 
   const onSubmit = async (data: FormSchema) => {
     if (isEditing && receivableSelectedData) {
-      putReceivable({ ...data as any, id: receivableSelectedData.id }, {
+      putReceivable({ ...data, id: receivableSelectedData.id }, {
         onSuccess: () => onClose()
       });
     } else {
-      postReceivable(data as any);
+      postReceivable(data);
     }
   };
 

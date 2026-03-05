@@ -59,9 +59,11 @@ export class DashboardService {
       totals: {
         payableBRL: totalPayableBRL,
         receivableBRL: totalReceivableBRL,
+        pendingTotalBRL: totalPayableBRL + totalReceivableBRL,
         balanceBRL: totalReceivableBRL - totalPayableBRL,
         payableUSD: totalPayableBRL * usdRate,
         receivableUSD: totalReceivableBRL * usdRate,
+        pendingTotalUSD: (totalPayableBRL + totalReceivableBRL) * usdRate,
         balanceUSD: (totalReceivableBRL - totalPayableBRL) * usdRate,
         overdueCount: expiredPayables + expiredReceivables,
         conversionRate: usdRate,
