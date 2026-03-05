@@ -16,7 +16,7 @@ Como desenvolvedor pleno, foquei em criar uma solução que não apenas entregas
 - **Componentização Avançada (DRY):** Implementei um componente de **GenericTable** que abstrai toda a lógica visual e funcional de tabelas. Através de uma configuração declarativa de colunas, consegui reaproveitar o mesmo componente para Pagar, Receber e Dashboard, mantendo a consistência visual.
 - **Gerenciamento de Estado Dinâmico:** Utilização do **TanStack React Query** para cache eficiente e sincronização de dados.
 - **Real-time Polling:** Implementado um mecanismo de polling (30s) para garantir que a cotação do dólar e os indicadores financeiros estejam sempre atualizados sem necessidade de refresh manual.
-- **Aesthetics & UX:** Interface construída com **Tailwind CSS** e **Shadcn/UI**, focada em um visual clean, Premium e com micro-interações (Skeletons, Toasts, Tooltips).
+- **Aesthetics & UX:** Interface construída com **Tailwind CSS** e **Shadcn/UI**, focada em um visual clean e com micro-interações (Skeletons, Toasts, Tooltips).
 
 ---
 
@@ -77,4 +77,5 @@ O sistema utiliza a **ExchangeRate-API** para fornecer conversão de moeda em te
 
 ---
 Desenvolvido por **Carlos Eduardo**.
+
 
