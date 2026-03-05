@@ -2,7 +2,19 @@ import { PaginatedResponse, Payable } from "@/types/api";
 import { useQuery } from "@tanstack/react-query";
 import { instance } from "../instance";
 
-export const useGetAllPayables = (page: number = 1, limit: number = 10, startDate?: string, endDate?: string) => {
+interface IGetAllParams {
+  page?: number;
+  limit?: number;
+  startDate?: string;
+  endDate?: string;
+}
+
+export const useGetAllPayables = ({
+  page = 1,
+  limit = 10,
+  startDate,
+  endDate,
+}: IGetAllParams) => {
   return useQuery<PaginatedResponse<Payable>>({
     queryKey: ["get-all-payables", page, limit, startDate, endDate],
     queryFn: async () => {
@@ -16,6 +28,7 @@ export const useGetAllPayables = (page: number = 1, limit: number = 10, startDat
       });
       return data;
     },
+    placeholderData: (prev) => prev,
   });
 };
 
@@ -29,4 +42,3 @@ export const useGetPayableById = (id: string) => {
     enabled: !!id,
   });
 };
-
