@@ -12,7 +12,7 @@ Como desenvolvedor pleno, foquei em criar uma solução que não apenas entregas
 - **DTOs & Validação:** Implementação de validações rigorosas com **Zod**, garantindo que apenas dados íntegros entrem no banco.
 - **Business Intelligence no SQL:** As agregações do dashboard são feitas de forma otimizada via consultas no banco de dados, evitando processamento desnecessário na camada de aplicação.
 
-### Frontend (UI / UX / DX)
+### Frontend
 - **Componentização Avançada (DRY):** Implementei um componente de **GenericTable** que abstrai toda a lógica visual e funcional de tabelas. Através de uma configuração declarativa de colunas, consegui reaproveitar o mesmo componente para Pagar, Receber e Dashboard, mantendo a consistência visual.
 - **Gerenciamento de Estado Dinâmico:** Utilização do **TanStack React Query** para cache eficiente e sincronização de dados.
 - **Real-time Polling:** Implementado um mecanismo de polling (30s) para garantir que a cotação do dólar e os indicadores financeiros estejam sempre atualizados sem necessidade de refresh manual.
@@ -65,9 +65,10 @@ Como desenvolvedor pleno, foquei em criar uma solução que não apenas entregas
 
 ---
 
-## 📝 Considerações do Desenvolvedor
+## 📝 Considerações
 
 Este projeto foi construído priorizando a **Organização do código e bons padrões de desenvolvimento**, com tipagem estrita em TypeScript em todos os níveis. As melhorias visuais e de layout (como a paginação acoplada e campos de valor inteligentes) foram decisões tomadas para elevar a qualidade do produto final além do "mínimo viável".
 
 ---
 Desenvolvido por **Carlos Eduardo**.
+
