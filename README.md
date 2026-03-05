@@ -75,9 +75,6 @@ O sistema utiliza a **ExchangeRate-API** para fornecer conversão de moeda em te
 
 ---
 
-## 📝 Considerações
-
-Este projeto foi construído priorizando a **Organização do código e bons padrões de desenvolvimento**, com tipagem estrita em TypeScript em todos os níveis. As melhorias visuais e de layout (como a paginação acoplada e campos de valor inteligentes) foram decisões tomadas para elevar a qualidade do produto final além do "mínimo viável".
-
 ---
 Desenvolvido por **Carlos Eduardo**.
+
