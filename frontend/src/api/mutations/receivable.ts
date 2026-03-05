@@ -1,8 +1,9 @@
 import { Receivable } from "@/types/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { instance } from "../instance";
 
-export const usePostReceivable = () => {
+export const usePostReceivable = ({ onClose }: { onClose: () => void }) => {
   const queryClient = useQueryClient();
   
   return useMutation({
@@ -13,9 +14,12 @@ export const usePostReceivable = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-all-receivables"] });
       queryClient.invalidateQueries({ queryKey: ["get-dashboard-summary"] });
+      onClose();
+      toast.success("Recebimento criado com sucesso!");
     },
     onError: (error) => {
       console.error(error);
+      toast.error("Erro ao criar recebimento!");
     },
   });
 };
@@ -33,9 +37,11 @@ export const usePutReceivable = () => {
       queryClient.invalidateQueries({ queryKey: ["get-all-receivables"] });
       queryClient.invalidateQueries({ queryKey: ["get-receivable-by-id", data.id] });
       queryClient.invalidateQueries({ queryKey: ["get-dashboard-summary"] });
+      toast.success("Recebimento atualizado com sucesso!");
     },
     onError: (error) => {
       console.error(error);
+      toast.error("Erro ao atualizar recebimento!");
     },
   });
 };
@@ -51,9 +57,12 @@ export const useDeleteReceivable = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-all-receivables"] });
       queryClient.invalidateQueries({ queryKey: ["get-dashboard-summary"] });
+      toast.success("Recebimento excluído com sucesso!");
     },
     onError: (error) => {
       console.error(error);
+      toast.error("Erro ao excluir recebimento!");
     },
   });
 };
+

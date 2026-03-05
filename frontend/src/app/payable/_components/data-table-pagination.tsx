@@ -52,7 +52,7 @@ export const DataTablePagination = ({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
       <span className="text-sm text-slate-500 order-2 sm:order-1">
         {total === 0
           ? "Nenhum registro encontrado"
@@ -95,11 +95,10 @@ export const DataTablePagination = ({
               key={pageNumber}
               variant={pageNumber === page ? "default" : "outline"}
               size="icon"
-              className={`h-8 w-8 text-sm ${
-                pageNumber === page
+              className={`h-8 w-8 text-sm ${pageNumber === page
                   ? "bg-blue-600 hover:bg-blue-700 border-blue-600 text-white"
                   : "border-slate-200 text-slate-600"
-              }`}
+                }`}
               onClick={() => onPageChange(pageNumber as number)}
             >
               {pageNumber}

@@ -2,16 +2,23 @@
 
 import { useGetAllReceivables } from "@/api/queries/receivable";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Receivable } from "@/types/api";
 import { FilterX, Plus } from "lucide-react";
 import { useState } from "react";
 import { DataTable } from "./_components/data-table";
 import { DataTablePagination } from "./_components/data-table-pagination";
 import { DateFilter } from "./_components/date-filter";
+import { ReceivableForm } from "./_components/form";
 
 export default function ReceivablesPage() {
   const [page, setPage] = useState(1);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [openDialogReceivable, setOpenDialogReceivable] = useState(false);
+  const [receivableSelected, setReceivableSelected] = useState<Receivable | null>(
+    null,
+  );
 
   const { data, isLoading, isFetching } = useGetAllReceivables({
     page,
@@ -40,6 +47,11 @@ export default function ReceivablesPage() {
     setPage(newPage);
   };
 
+  const handleCloseDialog = () => {
+    setOpenDialogReceivable(false);
+    setReceivableSelected(null);
+  };
+
   return (
     <div className="flex-1 space-y-6 p-8 pt-6 overflow-y-auto bg-slate-50/50">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -48,16 +60,31 @@ export default function ReceivablesPage() {
             Contas a Receber
           </h2>
           <p className="text-slate-500 text-sm mt-1">
-            Listagem de contas a receber
+            Gestão de contas a receber da sua empresa
           </p>
         </div>
-        <Button
-          className="bg-blue-600 hover:bg-blue-700 text-white gap-2"
-          onClick={() => console.log("Abrir modal de novo recebimento")}
+        <Dialog
+          open={openDialogReceivable}
+          onOpenChange={(open) => {
+            setOpenDialogReceivable(open);
+            if (!open) setReceivableSelected(null);
+          }}
         >
-          <Plus className="h-4 w-4" />
-          Novo recebimento
-        </Button>
+          <DialogTrigger asChild>
+            <Button
+              className="bg-blue-600 hover:bg-blue-700 text-white gap-2"
+              onClick={() => setReceivableSelected(null)}
+            >
+              <Plus className="h-4 w-4" />
+              Novo Recebimento
+            </Button>
+          </DialogTrigger>
+
+          <ReceivableForm
+            receivableSelectedData={receivableSelected}
+            onClose={handleCloseDialog}
+          />
+        </Dialog>
       </div>
 
       <div className="bg-white rounded-lg border border-slate-200 p-4">
@@ -90,15 +117,23 @@ export default function ReceivablesPage() {
         </div>
       </div>
 
-      <div
-        className={`transition-opacity duration-200 ${isFetching && !isLoading ? "opacity-60" : "opacity-100"}`}
-      >
-        <DataTable data={data?.data ?? []} isLoading={isLoading} />
-      </div>
+      <div className="space-y-4">
+        <div
+          className={`transition-opacity duration-200 ${isFetching && !isLoading ? "opacity-60" : "opacity-100"}`}
+        >
+          <DataTable
+            data={data?.data ?? []}
+            isLoading={isLoading}
+            setReceivableSelected={setReceivableSelected}
+            openDialog={() => setOpenDialogReceivable(true)}
+          />
+        </div>
 
-      {data?.meta && (
-        <DataTablePagination meta={data.meta} onPageChange={handleChangePage} />
-      )}
+        {data?.meta && (
+          <DataTablePagination meta={data.meta} onPageChange={handleChangePage} />
+        )}
+      </div>
     </div>
   );
 }
+

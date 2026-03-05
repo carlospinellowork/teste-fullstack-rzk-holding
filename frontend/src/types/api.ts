@@ -1,5 +1,5 @@
-export type PayableStatus = 'PENDING' | 'PAID';
-export type ReceivableStatus = 'PENDING' | 'RECEIVED';
+export type PayableStatus = "PENDING" | "PAID";
+export type ReceivableStatus = "PENDING" | "RECEIVED";
 
 export interface Payable {
   id: string;

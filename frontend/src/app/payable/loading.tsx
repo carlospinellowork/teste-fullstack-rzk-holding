@@ -1,4 +1,6 @@
+import { TableSkeleton } from "@/components/globals/table-skeleton";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export default function LoadingPayables() {
   return (
@@ -11,32 +13,23 @@ export default function LoadingPayables() {
         <Skeleton className="h-10 w-36 rounded-md" />
       </div>
 
-      <div className="bg-white rounded-lg border border-slate-200 p-4 flex gap-4">
-        <div className="space-y-1.5">
-          <Skeleton className="h-3 w-32 rounded" />
-          <div className="flex gap-3">
-            <Skeleton className="h-9 w-40 rounded-md" />
-            <Skeleton className="h-9 w-40 rounded-md" />
-          </div>
-        </div>
+      <div className="bg-white rounded-lg border border-slate-200 p-4">
+        <Skeleton className="h-16 w-full rounded-md" />
       </div>
 
-      <div className="rounded-lg border border-slate-200 overflow-hidden shadow-sm bg-white">
-        <div className="bg-slate-50/80 border-b border-slate-200 px-6 py-3 flex gap-16">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <Skeleton key={i} className="h-4 w-20 rounded" />
-          ))}
-        </div>
-        {Array.from({ length: 10 }).map((_, i) => (
-          <div
-            key={i}
-            className="px-6 py-4 flex gap-16 border-b border-slate-100 last:border-0 even:bg-slate-50/40"
-          >
-            {Array.from({ length: 6 }).map((_, j) => (
-              <Skeleton key={j} className="h-4 w-20 rounded" />
-            ))}
-          </div>
-        ))}
+      <div className="rounded-lg border border-slate-200 overflow-hidden bg-white">
+        <Table>
+          <TableHeader className="bg-slate-50/80">
+            <TableRow>
+              {Array.from({ length: 7 }).map((_, i) => (
+                <TableHead key={i}><Skeleton className="h-4 w-20" /></TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableSkeleton columnsCount={7} />
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

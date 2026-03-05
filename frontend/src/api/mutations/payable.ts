@@ -1,8 +1,9 @@
 import { Payable } from "@/types/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { instance } from "../instance";
 
-export const usePostPayable = () => {
+export const usePostPayable = ({ onClose }: { onClose: () => void }) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -11,13 +12,15 @@ export const usePostPayable = () => {
 
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-all-payables"] });
       queryClient.invalidateQueries({ queryKey: ["get-dashboard-summary"] });
-      console.log(data);
+      onClose();
+      toast.success("Pagamento criado com sucesso!");
     },
     onError: (error) => {
-      console.log(error);
+      console.error(error);
+      toast.error("Erro ao criar pagamento!");
     },
   });
 };
@@ -34,12 +37,15 @@ export const usePutPayable = () => {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["get-all-payables"] });
-      queryClient.invalidateQueries({ queryKey: ["get-payable-by-id", data.id] });
+      queryClient.invalidateQueries({
+        queryKey: ["get-payable-by-id", data.id],
+      });
       queryClient.invalidateQueries({ queryKey: ["get-dashboard-summary"] });
-      console.log(data);
+      toast.success("Pagamento atualizado com sucesso!");
     },
     onError: (error) => {
-      console.log(error);
+      console.error(error);
+      toast.error("Erro ao atualizar pagamento!");
     },
   });
 };
@@ -53,14 +59,14 @@ export const useDeletePayable = () => {
 
       return response.data;
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-all-payables"] });
       queryClient.invalidateQueries({ queryKey: ["get-dashboard-summary"] });
-      console.log(data);
+      toast.success("Pagamento excluído com sucesso!");
     },
     onError: (error) => {
-      console.log(error);
+      console.error(error);
+      toast.error("Erro ao excluir pagamento!");
     },
   });
 };
-

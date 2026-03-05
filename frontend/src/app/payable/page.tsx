@@ -2,16 +2,21 @@
 
 import { useGetAllPayables } from "@/api/queries/payable";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { Payable } from "@/types/api";
 import { FilterX, Plus } from "lucide-react";
 import { useState } from "react";
 import { DataTable } from "./_components/data-table";
 import { DataTablePagination } from "./_components/data-table-pagination";
 import { DateFilter } from "./_components/date-filter";
+import { PayableForm } from "./_components/form";
 
 export default function PayablesPage() {
   const [page, setPage] = useState(1);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [openDialogPayable, setOpenDialogPayable] = useState(false);
+  const [payableSelected, setPayableSelected] = useState<Payable | null>(null);
 
   const { data, isLoading, isFetching } = useGetAllPayables({
     page,
@@ -40,6 +45,11 @@ export default function PayablesPage() {
     setPage(newPage);
   };
 
+  const handleCloseDialog = () => {
+    setOpenDialogPayable(false);
+    setPayableSelected(null);
+  };
+
   return (
     <div className="flex-1 space-y-6 p-8 pt-6 overflow-y-auto bg-slate-50/50">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -51,13 +61,22 @@ export default function PayablesPage() {
             Gerencie as contas a pagar da sua empresa
           </p>
         </div>
-        <Button
-          className="bg-blue-600 hover:bg-blue-700 text-white gap-2"
-          onClick={() => console.log("Abrir modal de novo pagamento")}
-        >
-          <Plus className="h-4 w-4" />
-          Novo Pagamento
-        </Button>
+        <Dialog open={openDialogPayable} onOpenChange={(open) => {
+          setOpenDialogPayable(open);
+          if (!open) setPayableSelected(null);
+        }}>
+          <DialogTrigger asChild>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white gap-2" onClick={() => setPayableSelected(null)}>
+              <Plus className="h-4 w-4" />
+              Novo Pagamento
+            </Button>
+          </DialogTrigger>
+
+          <PayableForm
+            payableSelectedData={payableSelected}
+            onClose={handleCloseDialog}
+          />
+        </Dialog>
       </div>
 
       <div className="bg-white rounded-lg border border-slate-200 p-4">
@@ -90,15 +109,23 @@ export default function PayablesPage() {
         </div>
       </div>
 
-      <div
-        className={`transition-opacity duration-200 ${isFetching && !isLoading ? "opacity-60" : "opacity-100"}`}
-      >
-        <DataTable data={data?.data ?? []} isLoading={isLoading} />
-      </div>
+      <div className="space-y-4">
+        <div
+          className={`transition-opacity duration-200 ${isFetching && !isLoading ? "opacity-60" : "opacity-100"}`}
+        >
+          <DataTable
+            data={data?.data ?? []}
+            isLoading={isLoading}
+            setPayableSelected={setPayableSelected}
+            openDialog={() => setOpenDialogPayable(true)}
+          />
+        </div>
 
-      {data?.meta && (
-        <DataTablePagination meta={data.meta} onPageChange={handleChangePage} />
-      )}
+        {data?.meta && (
+          <DataTablePagination meta={data.meta} onPageChange={handleChangePage} />
+        )}
+      </div>
     </div>
   );
 }
+

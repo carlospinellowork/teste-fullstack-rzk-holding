@@ -3,6 +3,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { QueryProvider } from "@/providers/react-provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const inter = Inter({
@@ -28,10 +29,8 @@ export default function RootLayout({
             <div className="flex min-h-screen w-full">
               <AppSidebar />
               <main className="flex-1 flex flex-col min-w-0">
-                {/* <header className="h-16 flex items-center gap-4 border-b bg-white px-6 shrink-0">
-                  <div className="flex-1" />
-                </header> */}
                 {children}
+                <Toaster position="top-center" />
               </main>
             </div>
           </SidebarProvider>
