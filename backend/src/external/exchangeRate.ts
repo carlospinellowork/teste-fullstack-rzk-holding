@@ -11,7 +11,7 @@ export class ExchangeRate {
       return response.data.conversion_rates.USD;
     } catch (error) {
       console.error('Error fetching USD exchange rate:', error);
-      return 0;
+      return 0.18; // Fallback value in case of API failure
     }
   }
 }

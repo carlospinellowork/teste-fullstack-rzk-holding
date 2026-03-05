@@ -65,10 +65,19 @@ Como desenvolvedor pleno, foquei em criar uma solução que não apenas entregas
 
 ---
 
+## Integração Externa (ExchangeRate-API)
+
+O sistema utiliza a **ExchangeRate-API** para fornecer conversão de moeda em tempo real para o saldo projetado:
+
+- **Camada Backend:** Criamos uma classe especializada (`ExchangeRate`) que encapsula o consumo da API externa. O backend busca a cotação atual (BRL -> USD) no momento em que o sumário do dashboard é solicitado.
+- **Camada Frontend:** Os indicadores financeiros do dashboard são sincronizados automaticamente com o backend a cada **30 segundos** utilizando a estratégia de **Polling** com o *TanStack React Query*.
+- **Resiliência:** O sistema está preparado para exibir os valores em BRL mesmo em caso de falha na API externa ou ausência da chave, garantindo a disponibilidade das funções core de gestão.
+
+---
+
 ## 📝 Considerações
 
 Este projeto foi construído priorizando a **Organização do código e bons padrões de desenvolvimento**, com tipagem estrita em TypeScript em todos os níveis. As melhorias visuais e de layout (como a paginação acoplada e campos de valor inteligentes) foram decisões tomadas para elevar a qualidade do produto final além do "mínimo viável".
 
 ---
 Desenvolvido por **Carlos Eduardo**.
-
